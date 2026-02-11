@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace BuditelWebServer.Server.HTTP
 {
-	public enum StatusCode
+	public enum Method
 	{
-		OK = 200,
-		Found = 302,
-		BadRequest = 400,
-		Unauthorized = 401,
-		NotFound = 404
+		Get = 1,
+		Post = 2,
+		Put = 3,
+		Delete = 4
 	}
 }
