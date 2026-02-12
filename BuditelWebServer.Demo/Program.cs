@@ -1,4 +1,5 @@
 ﻿using BuditelWebServer.Server;
+using BuditelWebServer.Server.Responses;
 
 namespace BuditelWebServer.Demo
 {
@@ -6,7 +7,9 @@ namespace BuditelWebServer.Demo
 	{
 		static void Main(string[] args)
 		{
-			var server = new HttpServer("127.0.0.1", 8080);
+			var server = new HttpServer(x =>
+			x.MapGet("/html", new HtmlResponse("<h1 style=\"color:blue;\">Hello from my html response</h1>"))
+			.MapGet("/", new TextResponse("Hello from my server, now with routing table!!!")));
 			server.Start();
 		}
 	}

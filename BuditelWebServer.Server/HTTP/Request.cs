@@ -55,7 +55,7 @@ namespace BuditelWebServer.Server.HTTP
 				if (headerLine == string.Empty)
 					break;
 
-				var headerParts = headerLine.Split(":");
+				var headerParts = headerLine.Split(":",2);
 
 				if(headerParts.Length != 2)
 				{

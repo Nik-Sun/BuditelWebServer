@@ -20,5 +20,23 @@ namespace BuditelWebServer.Server.HTTP
         public StatusCode StatusCode { get; init; }
         public string Body { get; set; }
 
+		public override string ToString()
+		{
+			var result = new StringBuilder();
+
+			result.AppendLine($"HTTP/1.1 {(int)StatusCode} {StatusCode}");
+			foreach (var header in Headers)
+			{
+				result.AppendLine(header.ToString());
+			}
+			result.AppendLine();
+
+			if (string.IsNullOrWhiteSpace(Body) == false)
+			{
+				result.Append(Body);
+			}
+			return result.ToString();
+		}
+
     }
 }

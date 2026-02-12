@@ -54,21 +54,18 @@ namespace BuditelWebServer.Server
 
 				var requestText = ReadRequest(networkStream);
                 Console.WriteLine(requestText);
-                //WriteResponse(networkStream, "Hello from the server!");
-                //connection.Close();
+				var request = Request.Parse(requestText);
+				var response = routes.MatchRequest(request);
+                WriteResponse(networkStream, response);
+                connection.Close();
             }
 		}
 
-		private void WriteResponse(NetworkStream networkStream, string message)
+		
+
+		private void WriteResponse(NetworkStream networkStream, Response response)
 		{
-			int contentLength = Encoding.UTF8.GetByteCount(message);
-			var response = $@"HTTP/1.1
-Content-Type:text/plain; charset=UTF-8
-Content-Length: {contentLength}
-
-{message}";
-
-			var responseBytes = Encoding.UTF8.GetBytes(response);
+			var responseBytes = Encoding.UTF8.GetBytes(response.ToString());
 			networkStream.Write(responseBytes);
 		}
 

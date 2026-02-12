@@ -19,5 +19,13 @@ namespace BuditelWebServer.Server.HTTP
 
 			Body = content;
 		}
+
+		public override string ToString()
+		{
+			var contentLength = Encoding.UTF8.GetByteCount(Body);
+			this.Headers.Add(Header.ContentLength, contentLength.ToString());
+
+			return base.ToString();
+		}
 	}
 }
