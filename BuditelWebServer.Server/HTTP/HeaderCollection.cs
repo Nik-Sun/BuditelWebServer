@@ -19,9 +19,26 @@ namespace BuditelWebServer.Server.HTTP
 
         public void Add(string name,string value)
         {
-            var header = new Header(name, value);
-            headers.Add(name,header);
+		
+				var header = new Header(name, value);
+				headers[name] = header;
         }
+		public string this[string name]
+		{
+			get
+			{
+				return headers[name].Value;
+			}
+			set
+			{
+				headers[name].Value = value;
+			}
+		}
+
+		public bool Contains(string name)
+		{
+			return headers.ContainsKey(name);
+		}
 
 		public IEnumerator<Header> GetEnumerator()
 		{

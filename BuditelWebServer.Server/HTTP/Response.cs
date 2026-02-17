@@ -20,6 +20,11 @@ namespace BuditelWebServer.Server.HTTP
         public StatusCode StatusCode { get; init; }
         public string Body { get; set; }
 
+		public Action<Request,Response> PreRnderAction { get; protected set; }
+
+
+
+
 		public override string ToString()
 		{
 			var result = new StringBuilder();

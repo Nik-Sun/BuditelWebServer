@@ -56,6 +56,11 @@ namespace BuditelWebServer.Server
                 Console.WriteLine(requestText);
 				var request = Request.Parse(requestText);
 				var response = routes.MatchRequest(request);
+				if(response.PreRnderAction != null)
+				{
+					response.PreRnderAction(request, response);
+				}
+
                 WriteResponse(networkStream, response);
                 connection.Close();
             }

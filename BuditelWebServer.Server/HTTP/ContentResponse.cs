@@ -1,22 +1,19 @@
 ﻿using BuditelWebServer.Server.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace BuditelWebServer.Server.HTTP
 {
 	public class ContentResponse : Response
 	{
-		public ContentResponse(string content,string contentType) 
+		public ContentResponse(string content,string contentType,
+			Action<Request,Response> preRenderAction = null) 
 			: base(StatusCode.OK)
 		{
 			Guard.AgainstNull(content);
 			Guard.AgainstNull(contentType);
 
 			Headers.Add(Header.ContentType, contentType);
-
+			PreRnderAction = preRenderAction;
 			Body = content;
 		}
 
